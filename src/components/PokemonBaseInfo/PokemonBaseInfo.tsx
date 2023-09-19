@@ -1,4 +1,4 @@
-import { PokemonBaseInfoType } from "@/pages/pokemon/[id]";
+import { PokemonBaseInfoType } from "@/types/types";
 
 const PokemonBaseInfo = ({
   id,

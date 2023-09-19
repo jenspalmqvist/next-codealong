@@ -1,12 +1,18 @@
-import { PokemonAbilityType } from "@/pages/pokemon/[id]";
+import { PokemonAbilityType } from "@/types/types";
 
-const PokemonAbility = ({ is_hidden, slot, ability }: PokemonAbilityType) => {
-  console.log("hej?");
+type PokemonAbilityProps = PokemonAbilityType & { color?: string };
+
+const PokemonAbility = ({
+  color,
+  id,
+  name,
+  is_main_series,
+}: PokemonAbilityProps) => {
   return (
     <>
-      <div>is_hidden: {is_hidden + ""}</div>
-      <div>slot: {slot}</div>
-      <div>name: {ability.name}</div>
+      <div>is_main_series: {is_main_series + ""}</div>
+      <div>name: {name}</div>
+      <div>id: {id}</div>
     </>
   );
 };

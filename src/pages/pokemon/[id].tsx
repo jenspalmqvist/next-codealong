@@ -1,31 +1,11 @@
 import PokemonAbility from "@/components/PokemonAbility/PokemonAbility";
 import PokemonBaseInfo from "@/components/PokemonBaseInfo/PokemonBaseInfo";
+import { PokemonType } from "@/types/types";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export type PokemonBaseInfoType = {
-  id: number;
-  name: string;
-  base_experience: number;
-  height: number;
-  is_default: boolean;
-  order: number;
-  weight: number;
-};
-
-export type PokemonAbilityType = {
-  is_hidden: boolean;
-  slot: number;
-  ability: { name: string };
-};
-
-export type PokemonType = PokemonBaseInfoType & {
-  abilities: PokemonAbilityType[];
-};
-
 const Pokemon = () => {
   const router = useRouter();
-
   const id = router.query.id;
   const [data, setData] = useState<PokemonType | null>(null);
 
@@ -39,7 +19,7 @@ const Pokemon = () => {
       fetchData();
     }
   }, [router]);
-  console.log(data?.abilities);
+
   return data ? (
     <>
       <div>Base info:</div>
@@ -52,13 +32,15 @@ const Pokemon = () => {
         weight={data.weight}
         order={data.order}
       />
-      {data.abilities.map((ability) => {
-        console.log(ability);
+      <br />
+      <div>Abilities:</div>
+      {data.abilities.map((abilityInfo, index) => {
         return (
           <PokemonAbility
-            is_hidden={ability.is_hidden}
-            slot={ability.slot}
-            ability={ability.ability}
+            key={index}
+            is_main_series={abilityInfo.ability.is_main_series}
+            name={abilityInfo.ability.name}
+            id={abilityInfo.ability.id}
           />
         );
       })}
